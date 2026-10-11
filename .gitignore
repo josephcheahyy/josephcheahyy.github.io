@@ -1,6 +1,9 @@
-# Sensitive local documents & references
+# Sensitive local documents & raw references
 Reference/
-*.pdf
+Reference/*.pdf
+
+# Explicitly allow the sanitized public resume for download
+!Joseph_Cheah_Resume.pdf
 
 # Environment & Credentials
 .env
