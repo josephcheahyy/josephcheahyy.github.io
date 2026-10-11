@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joseph Cheah | Portfolio</title>
+<meta name="description" content="Joseph Cheah, Civil and Structural Engineer specializing in high-rise design, water supply systems, and computational engineering.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏗️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #020617;
+    --surface: #0f172a;
+    --ink: #e2e8f0;
+    --ink-soft: #94a3b8;
+    --muted: #64748b;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59, 130, 246, 0.15);
+    --deco: #3b82f6;
+    --deco-soft: rgba(59, 130, 246, 0.1);
+    --line: rgba(59, 130, 246, 0.3);
+    --grid-line: rgba(59, 130, 246, 0.05);
+    --shadow: rgba(59, 130, 246, 0.2);
+    --radius-card: 4px;
+    --radius-pill: 9999px;
+  }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  * { -webkit-font-smoothing: antialiased; }
+
+  .hero-glow {
+    position: absolute; top: -220px; left: 50%; transform: translateX(-50%);
+    width: 1100px; height: 800px; pointer-events: none; z-index: 0;
+    background: radial-gradient(closest-side, var(--deco) 0%, transparent 72%);
+    opacity: .15; filter: blur(40px);
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+  
+  @keyframes glowPulse {
+    0%, 100% { opacity: .1; transform: translateX(-50%) scale(1); }
+    50% { opacity: .2; transform: translateX(-50%) scale(1.02); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  .dim-rule {
+    display: flex; align-items: center; gap: 6px; margin: 10px 0 22px;
+  }
+  .dim-rule::before, .dim-rule::after {
+    content: ""; width: 7px; height: 7px; border-left: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent); opacity: .55; flex-shrink: 0;
+  }
+  .dim-rule::after { transform: scaleX(-1); }
+  .dim-rule .line { flex: 1; height: 1px; background: var(--line); }
+  
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  h1.font-display, h2.font-display { text-transform: uppercase; letter-spacing: .01em; }
+  
+  .site-nav { border-top: 2px solid var(--accent); box-shadow: 0 0 10px rgba(59,130,246,0.3); }
+  ::selection { background: var(--accent); color: #020617; }
+  
+  a.tag-link:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px rgba(59,130,246,0.2); }
+  
+  .site-content > section {
+    transition: transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease, border-color .35s ease;
+  }
+  .site-content > section:hover { transform: translateY(-2px); box-shadow: 0 0 15px var(--shadow); border-color: var(--accent); }
+  
+  html { scroll-behavior: smooth; }
+  body { padding-top: 56px; }
+  #about, #experience, #education, #skills, #contact { scroll-margin-top: 74px; }
+  
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 56px;
+    background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-nav-inner {
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .site-nav-brand {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px;
+    color: var(--accent); text-decoration: none; letter-spacing: .02em; text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(59,130,246,0.5);
+  }
+  .site-nav-links { display: flex; align-items: center; gap: 22px; }
+  .site-nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--ink-soft); text-decoration: none;
+    padding: 2px 0 4px; border-bottom: 1.5px solid transparent;
+    transition: color .2s ease, border-color .2s ease, text-shadow .2s ease;
+  }
+  .site-nav-links a:hover { color: var(--accent); border-color: var(--accent); text-shadow: 0 0 8px rgba(59,130,246,0.5); }
+  
+  @media (max-width: 640px) {
+    .site-nav-links { gap: 12px; }
+    .site-nav-links a { font-size: 11.5px; }
+  }
+
+  .glitch-text {
+    position: relative;
+    color: var(--ink);
+  }
+  .glitch-text::before, .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 red;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+  }
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 blue;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+  }
+  
+  @keyframes glitch-anim {
+    0% { clip: rect(31px, 9999px, 94px, 0); }
+    20% { clip: rect(62px, 9999px, 42px, 0); }
+    40% { clip: rect(16px, 9999px, 78px, 0); }
+    60% { clip: rect(89px, 9999px, 13px, 0); }
+    80% { clip: rect(45px, 9999px, 56px, 0); }
+    100% { clip: rect(12px, 9999px, 88px, 0); }
+  }
+
+  .hero-structural-bg {
+    position: absolute;
+    top: 56px; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 1200px;
+    height: 400px;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    opacity: 0.6;
+  }
+  .hero-structural-bg svg {
+    width: 100%; height: 100%;
+  }
+  .comp-node {
+    animation: pulseNode 2s infinite alternate;
+  }
+  @keyframes pulseNode {
+    0% { r: 2; opacity: 0.3; }
+    100% { r: 5; opacity: 1; }
+  }
+  .draw-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 5s linear forwards infinite;
+  }
+  @keyframes drawLine {
+    0% { stroke-dashoffset: 1000; }
+    50% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 0; }
+  }
+  
+  /* Decorative Section Numbers */
+  section { position: relative; overflow: hidden; }
+  section > * { position: relative; z-index: 2; }
+  
+  section#about::before { content: '01'; }
+  section#experience::before { content: '02'; }
+  section#education::before { content: '03'; }
+  section#skills::before { content: '04'; }
+  
+  section::before {
+    position: absolute;
+    top: -30px;
+    right: 10px;
+    font-size: 220px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.03;
+    z-index: 0;
+    pointer-events: none;
+    line-height: 1;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <div class="site-nav-inner max-w-[100rem] mx-auto px-6 sm:px-12">
+    <a href="#top" class="site-nav-brand">Joseph Cheah</a>
+    <div class="site-nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+    </div>
+  </div>
+</nav>
+
+<div class="site-content max-w-[100rem] mx-auto px-6 sm:px-12 py-16 sm:py-24 relative z-10">
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="hero-structural-bg" aria-hidden="true">
+    <!-- Giant Decorative Text -->
+    <div class="absolute bottom-[10%] left-[5%] text-[10rem] md:text-[14rem] font-display font-bold opacity-[0.03] text-[var(--accent)] leading-none select-none">
+      C&S
+    </div>
+    <div class="absolute top-[5%] right-[10%] text-[8rem] md:text-[12rem] font-display font-bold opacity-[0.02] text-[var(--accent)] leading-none select-none">
+      FEM
+    </div>
+
+    <!-- Scattered Structural Numbers (Brighter) -->
+    <div class="absolute top-[5%] left-[10%] text-[12px] font-mono opacity-[0.5] text-[var(--accent)]">
+      fck = 35 MPa | fy = 500 N/mm²
+    </div>
+    <div class="absolute top-[25%] left-[2%] text-[11px] font-mono opacity-[0.4] text-[var(--accent)]" style="writing-mode: vertical-rl;">
+      M_Ed = 450 kNm
+    </div>
+    <div class="absolute top-[15%] left-[30%] text-[11px] font-mono opacity-[0.4] text-[var(--accent)]">
+      V_Ed = 125.4 kN
+    </div>
+    <div class="absolute top-[40%] left-[15%] text-[12px] font-mono opacity-[0.5] text-[var(--accent)]">
+      [K]{U} = {F}
+    </div>
+    <div class="absolute top-[10%] left-[60%] text-[11px] font-mono opacity-[0.4] text-[var(--accent)] hidden sm:block">
+      As,req = 1250 mm²
+    </div>
+    <div class="absolute top-[30%] right-[15%] text-[11px] font-mono opacity-[0.5] text-[var(--accent)] hidden sm:block">
+      ux=0.015, uy=-0.042, rz=0.003
+    </div>
+    <div class="absolute bottom-[20%] right-[5%] text-[11px] font-mono opacity-[0.4] text-[var(--accent)] hidden md:block" style="writing-mode: vertical-rl;">
+      γ_c = 1.5, γ_s = 1.15
+    </div>
+    <div class="absolute top-[15%] right-[2%] text-[11px] font-mono opacity-[0.5] text-[var(--accent)] text-right hidden md:block">
+      [0.0034] [0.0120]<br>
+      [-0.012] [0.0041]<br>
+      > FEM: CONVERGED
+    </div>
+    <div class="absolute bottom-[30%] left-[40%] text-[11px] font-mono opacity-[0.4] text-[var(--accent)]">
+      δ_max ≤ L/250
+    </div>
+    <div class="absolute bottom-[10%] left-[30%] text-[12px] font-mono opacity-[0.4] text-[var(--accent)] hidden sm:block">
+      N_Ed = 2500 kN
+    </div>
+    <div class="absolute top-[5%] right-[30%] text-[12px] font-mono opacity-[0.5] text-[var(--accent)]">
+      E_cm = 34 GPa
+    </div>
+    <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.3">
+        <!-- Tower 1: Steel Frame -->
+        <rect x="50" y="150" width="80" height="250" />
+        <path d="M 50 190 L 130 190 M 50 230 L 130 230 M 50 270 L 130 270 M 50 310 L 130 310 M 50 350 L 130 350" />
+        <path d="M 50 150 L 130 190 M 130 150 L 50 190 M 50 190 L 130 230 M 130 190 L 50 230 M 50 230 L 130 270 M 130 230 L 50 270 M 50 270 L 130 310 M 130 270 L 50 310" opacity="0.5" />
+        
+        <!-- Tower 2: High-rise Core & Outrigger -->
+        <rect x="200" y="80" width="120" height="320" />
+        <path d="M 200 120 L 320 120 M 200 160 L 320 160 M 200 200 L 320 200 M 200 240 L 320 240 M 200 280 L 320 280 M 200 320 L 320 320 M 200 360 L 320 360" />
+        <line x1="260" y1="80" x2="260" y2="400" />
+        <path d="M 200 80 L 260 120 M 260 80 L 200 120 M 260 80 L 320 120 M 320 80 L 260 120" />
+        <path d="M 200 200 L 260 240 M 260 200 L 200 240 M 260 200 L 320 240 M 320 200 L 260 240" />
+
+        <!-- Tower 3: Parametric/Computational FEM Shell -->
+        <path d="M 400 400 Q 430 200 480 100 Q 530 200 560 400" stroke-width="1.5" />
+        <path d="M 420 400 Q 445 220 480 120 Q 515 220 540 400" stroke-width="1" opacity="0.7" />
+        <path d="M 440 400 Q 460 240 480 140 Q 500 240 520 400" stroke-width="1" opacity="0.4" />
+        <path d="M 410 300 L 550 300 M 425 220 L 535 220 M 455 150 L 505 150" stroke-dasharray="2 2" />
+
+        <!-- Tower 4: 3D Truss/Space Frame Bridge -->
+        <path d="M 620 250 L 660 200 L 700 250 L 740 200 L 780 250" stroke-width="1.5" />
+        <path d="M 620 300 L 660 250 L 700 300 L 740 250 L 780 300" stroke-width="1.5" />
+        <path d="M 620 350 L 660 300 L 700 350 L 740 300 L 780 350" stroke-width="1.5" />
+        <line x1="620" y1="250" x2="620" y2="400" />
+        <line x1="660" y1="200" x2="660" y2="400" />
+        <line x1="700" y1="250" x2="700" y2="400" />
+        <line x1="740" y1="200" x2="740" y2="400" />
+        <line x1="780" y1="250" x2="780" y2="400" />
+
+        <!-- Tower 5: Modern Skyscraper -->
+        <rect x="850" y="50" width="100" height="350" />
+        <rect x="870" y="20" width="60" height="30" />
+        <line x1="900" y1="0" x2="900" y2="20" stroke-width="2" />
+        <path d="M 850 90 L 950 90 M 850 130 L 950 130 M 850 170 L 950 170 M 850 210 L 950 210 M 850 250 L 950 250 M 850 290 L 950 290 M 850 330 L 950 330 M 850 370 L 950 370" opacity="0.7" />
+        <line x1="883" y1="50" x2="883" y2="400" opacity="0.5" />
+        <line x1="916" y1="50" x2="916" y2="400" opacity="0.5" />
+      </g>
+
+      <!-- Computational Nodes -->
+      <g fill="var(--accent)">
+        <circle cx="660" cy="200" class="comp-node" style="animation-delay: 0.1s" />
+        <circle cx="740" cy="200" class="comp-node" style="animation-delay: 0.4s" />
+        <circle cx="620" cy="250" class="comp-node" style="animation-delay: 0.2s" />
+        <circle cx="700" cy="250" class="comp-node" style="animation-delay: 0.5s" />
+        <circle cx="780" cy="250" class="comp-node" style="animation-delay: 0.3s" />
+        <circle cx="480" cy="100" class="comp-node" style="animation-delay: 0.6s" />
+        <circle cx="900" cy="0" class="comp-node" style="animation-delay: 0.8s" />
+      </g>
+
+      <!-- Data flow lines simulating analysis -->
+      <g stroke="var(--accent)" stroke-width="1.5" opacity="0.6">
+        <path d="M 130 150 Q 165 100 200 80" fill="none" class="draw-line" />
+        <path d="M 320 80 Q 400 50 480 100" fill="none" class="draw-line" style="animation-delay: 1s" />
+        <path d="M 480 100 Q 570 120 660 200" fill="none" class="draw-line" style="animation-delay: 2s" />
+        <path d="M 740 200 Q 820 150 900 0" fill="none" class="draw-line" style="animation-delay: 3s" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- HERO -->
+  <header id="top" class="reveal is-visible flex flex-col-reverse sm:flex-row gap-8 sm:gap-12 items-start sm:items-center justify-between">
+    <div class="min-w-0 flex-1">
+      <h1 class="font-display font-semibold tracking-tight text-3xl sm:text-4xl md:text-5xl leading-tight glitch-text" data-text="CHEAH YUE YEOU (JOSEPH)" style="color:var(--accent); text-shadow: 0 0 15px rgba(59,130,246,0.4);">CHEAH YUE YEOU (JOSEPH)</h1>
+      <p class="mt-3 text-base sm:text-lg" style="color:var(--ink-soft);">Civil and Structural Engineer · Cross-border Experience · AI & Computational Engineering</p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <a href="https://www.linkedin.com/in/josephcheah-intj-generalist/" target="_blank" rel="noopener" class="tag-link inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium transition-colors" style="background:var(--surface); color:var(--ink-soft); border:1px solid var(--line);">linkedin.com/in/josephcheah</a>
+      </div>
+    </div>
+
+    <!-- Profile Portrait -->
+    <div class="relative shrink-0 group mx-auto sm:mx-0">
+      <div class="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-blue-600/40 to-cyan-400/40 blur-sm group-hover:blur-md transition-all duration-300"></div>
+      <div class="relative w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-2xl overflow-hidden border border-[var(--line)] bg-[var(--surface)] shadow-2xl">
+        <img src="profile.jpg" alt="Cheah Yue Yeou (Joseph)" class="w-full h-full object-cover object-top filter contrast-[1.03] transition duration-500 group-hover:scale-105" />
+      </div>
+      <!-- Engineering Blueprint Corner Accents -->
+      <div class="absolute -top-1.5 -left-1.5 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--accent)] pointer-events-none"></div>
+      <div class="absolute -bottom-1.5 -right-1.5 w-3.5 h-3.5 border-b-2 border-r-2 border-[var(--accent)] pointer-events-none"></div>
+    </div>
+  </header>
+
+  <!-- SUMMARY -->
+  <section id="about" class="reveal is-visible mt-14 rounded-md p-7 sm:p-8" style="background:var(--surface); border:1px solid var(--line); box-shadow:0 1px 10px var(--shadow);">
+    <h2 class="font-display font-semibold text-xl" style="color:var(--accent);">Professional Summary</h2>
+    <div class="dim-rule"><span class="line"></span></div>
+    <p class="text-[15.5px] leading-7" style="color:var(--ink-soft);">
+      Civil and Structural Engineer with 5 years of cross-border experience (Malaysia, Singapore, Thailand, Taiwan) specializing in high-rise design, water supply systems, and project coordination. Proven expertise in <span class="font-semibold" style="color:var(--ink);">RC/PT design</span>, <span class="font-semibold" style="color:var(--ink);">BIM</span> (Revit, AutoCAD, SketchUp Pro), and computational engineering. Skilled at integrating digital tools (ETABS, ProtaStructure Suite) and AI-driven automation into workflows to deliver data-driven, cost-effective construction projects.
+    </p>
+  </section>
+
+  <!-- IMPACT & METRICS -->
+  <section class="reveal is-visible mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="rounded-md p-5 text-center transition-transform hover:-translate-y-1" style="background:var(--surface); border:1px solid var(--line); box-shadow:0 1px 10px var(--shadow);">
+      <div class="font-display font-bold text-3xl" style="color:var(--accent);">5+</div>
+      <div class="text-xs mt-1 uppercase tracking-wider font-semibold" style="color:var(--ink-soft);">Years Exp.</div>
+    </div>
+    <div class="rounded-md p-5 text-center transition-transform hover:-translate-y-1" style="background:var(--surface); border:1px solid var(--line); box-shadow:0 1px 10px var(--shadow);">
+      <div class="font-display font-bold text-3xl" style="color:var(--accent);">80%</div>
+      <div class="text-xs mt-1 uppercase tracking-wider font-semibold" style="color:var(--ink-soft);">Faster Modeling</div>
+    </div>
+    <div class="rounded-md p-5 text-center transition-transform hover:-translate-y-1" style="background:var(--surface); border:1px solid var(--line); box-shadow:0 1px 10px var(--shadow);">
+      <div class="font-display font-bold text-3xl" style="color:var(--accent);">40%</div>
+      <div class="text-xs mt-1 uppercase tracking-wider font-semibold" style="color:var(--ink-soft);">Faster Design</div>
+    </div>
+    <div class="rounded-md p-5 text-center transition-transform hover:-translate-y-1" style="background:var(--surface); border:1px solid var(--line); box-shadow:0 1px 10px var(--shadow);">
+      <div class="font-display font-bold text-3xl" style="color:var(--accent);">10+</div>
+      <div class="text-xs mt-1 uppercase tracking-wider font-semibold" style="color:var(--ink-soft);">Major Approvals</div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="reveal is-visible mt-8 rounded-md p-7 sm:p-8" style="background:var(--surface); border:1px solid var(--line); box-shadow:0 1px 10px var(--shadow);">
+    <h2 class="font-display font-semibold text-xl" style="color:var(--accent);">Relevant Experience</h2>
+    <div class="dim-rule"><span class="line"></span></div>
+
+    <ul class="space-y-0">
+      <!-- MY Leong Engineering -->
+      <li class="relative pb-8 pl-8" style="border-left:1px dashed var(--line);">
+        <span class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full" style="background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 8px var(--accent);"></span>
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <p class="font-semibold text-[15.5px]" style="color:var(--ink);">Computational Structural Engineer <span style="color:var(--accent);">— MY Leong Engineering Sdn. Bhd.</span></p>
+          <p class="font-mono text-xs" style="color:var(--accent); text-shadow:0 0 5px rgba(59,130,246,0.3);">NOV 2025 — CURRENT</p>
+        </div>
+        <p class="text-xs mb-2.5" style="color:var(--muted);">Cheras</p>
+        <ul class="list-disc pl-5 space-y-1.5 text-sm" style="color:var(--ink-soft);">
+          <li>Acted as an <span class="font-semibold" style="color:var(--ink);">independent technical advisor</span> to bridge cross-border engineering communications, directly brokering a joint venture agreement between Thai and Chinese stakeholders for a commercial data center.</li>
+          <li>Secured and fully delivered the reinforced concrete (RC) and steel structural designs for a <span class="font-semibold" style="color:var(--ink);">2-story data center in Johor</span>; executed Value Engineering (VE) initiatives that reduced total construction costs by 10–20%.</li>
+          <li>Integrating AI workflows with structural analysis software (ETABS, Midas, Revit) to fasten data analysis and improve decision making.</li>
+        </ul>
+      </li>
+
+      <!-- TYLin -->
+      <li class="relative pb-8 pl-8" style="border-left:1px dashed var(--line);">
+        <span class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full" style="background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 8px var(--accent);"></span>
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <p class="font-semibold text-[15.5px]" style="color:var(--ink);">Structural Engineer <span style="color:var(--accent);">— TYLin International Sdn. Bhd.</span></p>
+          <p class="font-mono text-xs" style="color:var(--accent); text-shadow:0 0 5px rgba(59,130,246,0.3);">JUN 2024 — AUG 2025</p>
+        </div>
+        <p class="text-xs mb-2.5" style="color:var(--muted);">Petaling Jaya</p>
+        <ul class="list-disc pl-5 space-y-1.5 text-sm" style="color:var(--ink-soft);">
+          <li>Designed and reviewed RC and post-tensioned (PT) structural systems for two major high-rise mixed-use developments.</li>
+          <li>Drafted out complex beam and column profiles across varied structural framing systems, significantly reducing clashing and material wastage.</li>
+          <li>Produced detailed structural drawings, curtailment layouts, and bar bending schedules.</li>
+          <li>Engineered custom Excel-based templates, accelerating <span class="font-semibold" style="color:var(--ink);">shear wall and core wall design processes by 40%</span>.</li>
+          <li>Developed AutoCAD AutoLISP scripts to automate ETABS modeling and preliminary column sizing workflows, increasing estimation efficiency by 80%.</li>
+        </ul>
+      </li>
+
+      <!-- Jurucita -->
+      <li class="relative pb-8 pl-8" style="border-left:1px dashed var(--line);">
+        <span class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full" style="background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 8px var(--accent);"></span>
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <p class="font-semibold text-[15.5px]" style="color:var(--ink);">Civil & Structural Engineer <span style="color:var(--accent);">— Jurucita Consultant</span></p>
+          <p class="font-mono text-xs" style="color:var(--accent); text-shadow:0 0 5px rgba(59,130,246,0.3);">SEPT 2023 — JUN 2024</p>
+        </div>
+        <p class="text-xs mb-2.5" style="color:var(--muted);">Bukit Mertajam</p>
+        <ul class="list-disc pl-5 space-y-1.5 text-sm" style="color:var(--ink-soft);">
+          <li>Managed comprehensive water supply projects across all lifecycle stages, from initial Kebenaran Merancang (KM) submissions to final handover.</li>
+          <li>Secured 10 critical water supply approvals within 6 months for major developments, including high-rise residential projects, by liaising effectively with Perbadanan Bekalan Air Pulau Pinang (PBA).</li>
+          <li>Directed and mentored a team of 7 junior engineers, developing comprehensive training programs for the water reticulation department.</li>
+          <li>Performed bi-weekly site inspections and rigorous technical reviews to ensure strict compliance with engineering standards.</li>
+          <li>Spearheaded an industrial development project and managed technical submission requirements across multiple concurrent client accounts.</li>
+        </ul>
+      </li>
+
+      <!-- Additional Experience -->
+      <li class="relative pl-8">
+        <span class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full" style="background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 8px var(--accent);"></span>
+        <h3 class="font-semibold text-[15.5px]" style="color:var(--ink);">Additional Experience & Innovation</h3>
+        
+        <div class="mt-3">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <p class="font-medium text-sm" style="color:var(--ink);">Project Lead & Developer <span style="color:var(--accent);">— Innovation Projects - NestWiseAi</span></p>
+            <p class="font-mono text-xs" style="color:var(--accent);">MAR 2025 — JUL 2025</p>
+          </div>
+          <ul class="list-disc pl-5 space-y-1 text-sm mt-1 mb-4" style="color:var(--ink-soft);">
+            <li>Served as a project team leader and developed an AI that helps people to plan their finances with ease.</li>
+            <li>Develop the Custom GPT model (Beta Version) through the OpenAI.</li>
+            <li>Used NotionAi and Canva to develop and design for the website.</li>
+          </ul>
+
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <p class="font-medium text-sm" style="color:var(--ink);">E-commerce Entrepreneur & Operations Lead <span style="color:var(--accent);">— Self-Employed</span></p>
+            <p class="font-mono text-xs" style="color:var(--accent);">2021 — 2022</p>
+          </div>
+          <ul class="list-disc pl-5 space-y-1 text-sm mt-1" style="color:var(--ink-soft);">
+            <li>Founded an e-commerce business selling digital design templates (Etsy) and physical goods (Shopee, Lazada), executing targeted digital marketing campaigns.</li>
+            <li>Organized and led a seasonal residential cleaning service team, driving customer acquisition through targeted Facebook Ads.</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- EDUCATION & HONORS -->
+  <section id="education" class="reveal is-visible mt-8 rounded-md p-7 sm:p-8" style="background:var(--surface); border:1px solid var(--line); box-shadow:0 1px 10px var(--shadow);">
+    <h2 class="font-display font-semibold text-xl" style="color:var(--accent);">Education & Honors</h2>
+    <div class="dim-rule"><span class="line"></span></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="font-semibold text-[15.5px] mb-4" style="color:var(--ink); border-bottom:1px solid var(--line); padding-bottom:8px;">Academic Background</h3>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between items-start">
+              <p class="font-medium text-sm" style="color:var(--ink);">Master of Project Management</p>
+              <p class="font-mono text-xs text-right" style="color:var(--accent);">Expected Grad. Sept 2026</p>
+            </div>
+            <p class="text-xs" style="color:var(--muted);">Universiti Malaya</p>
+            <p class="text-xs mt-1" style="color:var(--ink-soft);">Latest CGPA: 3.58</p>
+          </div>
+          <div>
+            <div class="flex justify-between items-start">
+              <p class="font-medium text-sm" style="color:var(--ink);">Bachelor of Civil Engineering</p>
+              <p class="font-mono text-xs text-right" style="color:var(--accent);">Sept 2017 – Aug 2021</p>
+            </div>
+            <p class="text-xs" style="color:var(--muted);">University Science of Malaysia (USM)</p>
+            <p class="text-xs mt-1" style="color:var(--ink-soft);">CGPA: 3.73 (1st Class Honor)</p>
+          </div>
+          <div>
+            <div class="flex justify-between items-start">
+              <p class="font-medium text-sm" style="color:var(--ink);">Matriculation in Science Stream</p>
+              <p class="font-mono text-xs text-right" style="color:var(--accent);">May 2016 – Jul 2017</p>
+            </div>
+            <p class="text-xs" style="color:var(--muted);">Kolej Matrikulasi Kedah (KMK)</p>
+            <p class="text-xs mt-1" style="color:var(--ink-soft);">CGPA: 4.00 (1st Class Honor)</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-[15.5px] mb-4" style="color:var(--ink); border-bottom:1px solid var(--line); padding-bottom:8px;">Featured Honors & Awards</h3>
+        <ul class="space-y-3 text-sm" style="color:var(--ink-soft);">
+          <li><span class="font-semibold" style="color:var(--ink);">Graduate Engineer</span> — Certified by Board of Engineers Malaysia (BEM) (Aug 2022)</li>
+          <li><span class="font-semibold" style="color:var(--ink);">1st Class Honour in Civil Engineering</span> — Certified by USM (Aug 2021)</li>
+          <li><span class="font-semibold" style="color:var(--ink);">1st Class Honour in Science Stream</span> — Certified by KMK (Jan 2017)</li>
+          <li><span class="font-semibold" style="color:var(--ink);">Publication (2025):</span> Assessing Cold-Formed Steel Section Performance in Fire: A Comprehensive Review of Numerical Models and Resistance Factors</li>
+          <li><span class="font-semibold" style="color:var(--ink);">Awards:</span> 7th Place, International UTM Bridge Model Competition (2019) | 3rd Place, USM Build and Break (2018) | 3rd Place, USM Earthquake Model Competition (2019)</li>
+          <li><span class="font-semibold" style="color:var(--ink);">Leadership:</span> HOD of IT and Design, ASCE & IEM (2020) | Community Service Leader (2017–2019)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="reveal is-visible mt-8 rounded-md p-7 sm:p-8" style="background:var(--surface); border:1px solid var(--line); box-shadow:0 1px 10px var(--shadow);">
+    <h2 class="font-display font-semibold text-xl" style="color:var(--accent);">Technical Skills</h2>
+    <div class="dim-rule"><span class="line"></span></div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      
+      <div class="p-4 rounded-md" style="background:rgba(59,130,246,0.02); border:1px solid rgba(59,130,246,0.1);">
+        <h3 class="font-semibold text-[14px] mb-3" style="color:var(--ink);">Drafting & Modelling</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">REVIT</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">AutoCAD</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">Lumion8</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">SketchUp</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">Rhino 8</span>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-md" style="background:rgba(59,130,246,0.02); border:1px solid rgba(59,130,246,0.1);">
+        <h3 class="font-semibold text-[14px] mb-3" style="color:var(--ink);">Structural Software</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--accent); border:1px solid var(--accent); box-shadow:0 0 5px var(--accent-soft);">ETABS</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">ProtaStructure</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">PROKON</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">SAP2000</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">AdaptPT</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">IDEA Statica</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">HILTI Profis</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">TEKLA</span>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-md" style="background:rgba(59,130,246,0.02); border:1px solid rgba(59,130,246,0.1);">
+        <h3 class="font-semibold text-[14px] mb-3" style="color:var(--ink);">Automation & AI</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--accent); border:1px solid var(--accent); box-shadow:0 0 5px var(--accent-soft);">Antigravity</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--accent); border:1px solid var(--accent); box-shadow:0 0 5px var(--accent-soft);">Claude Code</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">CAD Lisp</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">Pyrevit</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">GitHub</span>
+          <span class="tag-link inline-flex items-center rounded-sm px-2.5 py-1 text-xs font-medium" style="background:var(--bg); color:var(--ink-soft); border:1px solid var(--line);">WordPress</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Simple intersection observer for reveal effect
+  document.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll('.reveal');
+    // Initially add is-visible to all for safety if JS fails
+    // reveals.forEach(el => el.classList.add('is-visible'));
+  });
+</script>
+</body>
+</html>

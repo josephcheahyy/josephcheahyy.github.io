@@ -1,0 +1,11 @@
+# Sensitive local documents & references
+Reference/
+*.pdf
+
+# Environment & Credentials
+.env
+.env.*
+*.key
+*.pem
+*.token
+*.log
